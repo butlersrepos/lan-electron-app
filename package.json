@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-	"js": "riot src/tags"
-  },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
@@ -22,8 +18,18 @@
   },
   "dependencies": {
     "async": "^2.1.2",
+    "clrs": "^0.2.0",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.16.6",
+    "node-sass": "^3.13.0",
     "request": "^2.78.0",
     "riot": "^2.6.7"
+  },
+  "scripts": {
+    "start": "electron .",
+    "js": "riot src/tags",
+	"css": "node-sass src/scss/bundle.scss dist/bundle.css",
+    "watch-js": "riot src/tags --watch --style scss",
+	"watch-css": "node-sass src/scss/bundle.scss dist/css/bundle.css --watch"
   }
 }

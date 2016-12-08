@@ -1,7 +1,17 @@
 <start-app>
+	<header>Steam LAN Assist</header>
+	<form onsubmit={ init }>
+		<label for="steam-id">
+			Steam Id 
+			<span class="fa-stack">
+				<i class="fa fa-circle fa-stack-1x"></i>
+				<i class="fa fa-info fa-stack-1x"></i>
+			</span>
+		</label>
+		<input type="text" name="steam-id"/>
+	</form>
 
-	<header>Welcome to the Steam LAN Assistant</header>
-	<loader if={ isLoading }>Initializing LAN Assistant...</loader>
+	<!-- <loader if={ isLoading }>Initializing LAN Assistant...</loader> -->
 
 	<div class="game-listings" onclick={ showPlayerList } each={ gameEntries }>
 		<div class="game-listings-filter">
@@ -16,16 +26,19 @@
 		this.gameEntries = [];
 		
 		this.isLoading = true;
-		this.opts.lanApp.start()
-			.then( gameNameToFriendsList => {
-				this.namesMap = this.opts.lanApp.getNamesMap();
-				this.isLoading = false;
-				this.gameEntries = gameNameToFriendsList;
-				this.gameEntries.sort( (a, b) => {
-					return b.players.length - a.players.length;
+		
+		init() {
+			this.opts.lanApp.start()
+				.then( gameNameToFriendsList => {
+					this.namesMap = this.opts.lanApp.getNamesMap();
+					this.isLoading = false;
+					this.gameEntries = gameNameToFriendsList;
+					this.gameEntries.sort( (a, b) => {
+						return b.players.length - a.players.length;
+					});
+					this.update();
 				});
-				this.update();
-			});
+		}
 
 		showPlayerList(event) {
 			if( event.currentTarget.classList.contains('show-players') ) {
@@ -37,13 +50,22 @@
 		}
 	</script>
 
-	<style :scoped>
+	<style :scoped type="scss">
 		header {
 			font-size: 24px;
-			background: black;
+			background: #111;
 			color: #fff;
 		}
 		
+		form {
+			.fa-circle {
+				color: #68D286;
+			}
+			.fa-info {
+				color: #fff;
+			}
+		}
+
 		.game-listings {
 			background-color: #1b2838;
 			border-radius: 5px;
