@@ -5,6 +5,7 @@ let steamApi = require('./steam-web-api');
 
 // TODO: get from user
 let userSteamId = `76561198005327607`; // This is Sarophym's
+// let userSteamId = `76561197996756453`; // This is Pat K's
 let steamApiKey = `59A95A0F6EAE77FD106C2B5D83863A3D`;
 
 let friendsNamesMap = {};
